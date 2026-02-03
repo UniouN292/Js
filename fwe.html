@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Функции и события JS</title>
+<style>
+  .blue { color: blue; cursor: pointer; }
+  .red { color: red; cursor: pointer; }
+  .box { width:100px; height:100px; margin:5px; display:inline-block; }
+</style>
+</head>
+<body>
+
+<script>
+// 1
+function greet(name) {
+  return "Привет, " + name + "!";
+}
+console.log(greet("Erali"));
+
+// 2
+function sum(a, b) {
+  return a + b;
+}
+console.log(sum(3, 5), sum(10, 20));
+
+// 3
+function showMessage() {
+  alert("Функция сработала!");
+}
+window.onload = showMessage;
+</script>
+
+<!-- 4 -->
+<button id="btn1">Нажми</button>
+
+<!-- 5 -->
+<div id="hoverText">Наведи на меня</div>
+
+<!-- 6 -->
+<button id="countBtn">+</button>
+<p id="count">0</p>
+
+<!-- 7 -->
+<input id="textInput">
+<p id="output"></p>
+
+<!-- 8 -->
+<button id="msgBtn">Сообщение</button>
+
+<!-- 9 -->
+<div id="colorDiv" class="blue">Нажми меня</div>
+
+<!-- 10 -->
+<input id="n1" type="number">
+<input id="n2" type="number">
+<button id="sumBtn">Суммировать</button>
+<p id="sumResult"></p>
+
+<!-- 11 -->
+<button onclick="createBox('red')">Red</button>
+<button onclick="createBox('green')">Green</button>
+<button onclick="createBox('blue')">Blue</button>
+
+<!-- 12 -->
+<ul id="list">
+  <li>Один</li><li>Два</li><li>Три</li><li>Четыре</li><li>Пять</li>
+</ul>
+
+<!-- 13 -->
+<button id="start">Старт</button>
+<button id="stop">Стоп</button>
+<p id="timer">0</p>
+
+<!-- 14 -->
+<input id="email">
+<button id="send">Отправить</button>
+
+<!-- 15 -->
+<input id="guess">
+<button id="check">Проверить</button>
+<p id="hint"></p>
+
+<script>
+// 4 
+btn1.onclick = () => alert("Кнопка нажата!");
+
+// 5 
+hoverText.onmouseover = () => hoverText.style.color = "red";
+hoverText.onmouseout = () => hoverText.style.color = "black";
+
+// 6
+let c = 0;
+countBtn.onclick = () => count.textContent = ++c;
+
+// 7 
+textInput.oninput = () => output.textContent = textInput.value;
+
+// 8 
+function showAlert(msg) {
+  alert(msg);
+}
+msgBtn.onclick = () => showAlert("Привет!");
+
+// 9
+colorDiv.onclick = () => colorDiv.className = "red";
+
+// 10 
+sumBtn.onclick = () => {
+  sumResult.textContent = Number(n1.value) + Number(n2.value);
+};
+
+// 11 
+function createBox(color) {
+  const div = document.createElement("div");
+  div.className = "box";
+  div.style.background = color;
+  document.body.append(div);
+}
+
+// 12 
+list.onclick = e => {
+  if (e.target.tagName === "LI") alert(e.target.textContent);
+};
+
+// 13 
+let t, time = 0;
+start.onclick = () => {
+  t = setInterval(() => timer.textContent = ++time, 1000);
+};
+stop.onclick = () => clearInterval(t);
+
+// 14 
+send.onclick = () => {
+  alert(email.value.includes("@") ? "Email принят" : "Ошибка email");
+};
+
+// 15 
+let secret = Math.floor(Math.random()*10)+1;
+let tries = 0;
+check.onclick = () => {
+  tries++;
+  let g = Number(guess.value);
+  hint.textContent =
+    g < secret ? "Больше" :
+    g > secret ? "Меньше" :
+    "Угадал! Попыток: " + tries;
+};
+</script>
+
+</body>
+</html>
